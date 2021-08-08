@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Publisher\PublisherController;
+use App\Http\Controllers\Book\BookController;
+use App\Http\Controllers\Category\CategoryController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,11 +26,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 //Admin
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth','PreventBackHistory']],function(){
 	Route::get('dashboard',[AdminController::Class,'index'])->name('admin.dashboard');
 	Route::get('profile',[AdminController::Class,'profile'])->name('admin.profile');
+	Route::resource('books',BookController::Class);
+	//Categories
+	Route::resource('categories',CategoryController::Class);
+	Route::get('add',[BookController::Class,'add']);
 });
+
+
+
+
+
+
 
 //User
 Route::group(['prefix'=>'user','middleware'=>['user','auth','PreventBackHistory']],function(){
