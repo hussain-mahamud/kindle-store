@@ -14,7 +14,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $results=Category::all();
+    {   $results=Category::all()->sortByDesc("created_at");
         return view('dashboard.admin.categories.index',['results'=>$results]);
     }
 
@@ -98,6 +98,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $exist=DB::table('books')
+                ->where('cat_id','=',$id)
+                ->get();
+        dd($exist);
     }
 }

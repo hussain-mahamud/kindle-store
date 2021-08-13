@@ -6,6 +6,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Publisher\PublisherController;
 use App\Http\Controllers\Book\BookController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Slider\SliderController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +33,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth','PreventBackHistory']],function(){
 	Route::get('dashboard',[AdminController::Class,'index'])->name('admin.dashboard');
 	Route::get('profile',[AdminController::Class,'profile'])->name('admin.profile');
+	//Book pdf view
+	
+	//Resource
 	Route::resource('books',BookController::Class);
-	//Categories
 	Route::resource('categories',CategoryController::Class);
-	Route::get('add',[BookController::Class,'add']);
+	Route::resource('sliders',SliderController::Class);
 });
 
 

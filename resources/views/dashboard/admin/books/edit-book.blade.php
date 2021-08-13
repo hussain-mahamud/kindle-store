@@ -21,36 +21,38 @@
       @endif
    </div>
 	 <div class="card-body">
-         <form  action="{{route('books.store')}}" enctype="multipart/form-data" method="POST" 		class="row g-3">
+         <form  action="{{route('books.update',$book->id)}}" enctype="multipart/form-data" method="POST" 		class="row g-3">
             @csrf
+            @method('PUT')
             <div class="col-md-6">
                <label for="name" class="form-label">Book Title*</label>
-               <input type="text" class="form-control" id="name" name="title" required value="{{old('title')}}">
+               <input type="text" class="form-control" id="name" name="title" required value="{{$book->title}}">
             </div>
             <div class="col-md-6">
                <label for="code" class="form-label">Book Sub Title*</label>
-               <input type="text" class="form-control" id="code" name="sub_title" value="{{old('sub_title')}}" required>
+               <input type="text" class="form-control" id="code" name="sub_title" value="{{$book->sub_title}}" required>
             </div>
             <div class="col-md-4">
                <label for="keywords" class="form-label">Keywords</label>
-               <input type="text" class="form-control" id="keywords" name="keywords" value="{{old('keywords')}}" >
+               <input type="text" class="form-control" id="keywords" name="keywords" value="{{$book->keywords}}" >
             </div>
             <div class="col-md-4">
                <label for="author" class="form-label">Author Name*</label>
-               <input type="text" class="form-control" id="author" name="author" value="{{old('author')}}" required>
+               <input type="text" class="form-control" id="author" name="author" value="{{$book->author}}" required>
             </div>
             <div class="col-md-4">
                <label for="co_author" class="form-label">Co Author</label>
-               <input type="text" class="form-control" id="co_author" name="co_author" value="{{old('co_author')}}" >
+               <input type="text" class="form-control" id="co_author" name="co_author" value="{{$book->co_author}}" >
             </div>
             <div class="col-md-12">
                <label for="description" class="form-label ">Description*</label>
-               <textarea class="description form-control" name="description" >{{old('description')}}</textarea>
+               <textarea class="description form-control" name="description" >{{$book->description}}</textarea>
             </div>
             
             <div class="col-md-6">
                <label for="cat_id" class="form-label">Category*</label>
                <select id="cat_id" class="form-select form-control" name="cat_id">
+                <option value="{{$selected_cat->id}}">{{$selected_cat->cat_name}}</option>
                 @foreach($categories as $cat)
                  <option value="{{$cat->id}}">{{$cat->cat_name}}</option>
                 @endforeach
@@ -59,9 +61,13 @@
              <div class="col-md-6">
                <label for="feature" class="form-label">Feature Book*</label>
                <select id="feature" class="form-select form-control" name="feature">
-                 <option>Select....</option>
+                 @if($book->feature==1)
+                 <option value="1">Yes</option>
+                 <option value="0">No</option>
+                 @else
                  <option value="0">No</option>
                  <option value="1">Yes</option>
+                 @endif
                </select>
             </div>
             <div class="col-md-12">

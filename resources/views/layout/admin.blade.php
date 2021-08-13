@@ -23,7 +23,7 @@
     
     <!-- Custom Theme Style -->
     <link href="{{asset('dashboard/build/css/custom.min.css')}}" rel="stylesheet">
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="{{asset('dashboard/build/css/custom.min.css')}}" rel="stylesheet">
     <!-- data table  -->
     <link href="{{asset('dashboard/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('dashboard/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">

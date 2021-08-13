@@ -1,3 +1,6 @@
+/*$(document).ready(function() {
+    $('#datatable-buttons').DataTable();
+} );*/
 /* $(document).ready(function(){
  	$('.update-cat').click(function (e) {
  	    e.preventDefault();
