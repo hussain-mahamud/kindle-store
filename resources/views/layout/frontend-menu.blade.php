@@ -8,11 +8,11 @@
                   <ul>
                      <li><a href="{{route('home')}}">Home</a></li>
                      <li class="megamenu-holder hello">
-                        <a href="shop-left-sidebar.html">Categories</a>
+                        <a href="#">Categories</a>
                         <ul class="megamenu hb-megamenu">
                            <li>
                               @foreach($categories as $category)
-                              <a href="#">{{$category->cat_name}}</a>
+                              <a href="{{route('categoryWiseBook',$category->id)}}">{{$category->cat_name}}</a>
                               @endforeach
                            </li>
                           

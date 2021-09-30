@@ -30,7 +30,7 @@ Route::get('/cart',[CartController::Class,'index'])->name('cart');
 Route::POST('/add-to-cart',[CartController::Class,'addToCart'])->name('addTocart');
 Route::POST('/remove-cart',[CartController::Class,'removeItem'])->name('removeItem');
 //Single Page
-
+Route::get('/category/books/{id}',[FrontendController::Class,'categoryWiseBook'])->name('categoryWiseBook');
 
 
 

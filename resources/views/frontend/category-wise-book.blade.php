@@ -1,29 +1,27 @@
 @extends('layout.frontend')
 @section('content')
-@include('frontend.slider')
-<div class="container d-flex justify-content-center product-area pt-60 pb-50">
+
+<div class="container pb-50">
     <div class="row">
        <!-- start -->
-        <div class="col-lg-12">
-         <div class="li-product-tab">
-            <ul class="nav li-product-menu">
-               <li>
-                  <a class="active" data-toggle="tab" href="#li-new-product"><span>New Arrival</span></a>
-               </li>
-               <li>
-                  <a data-toggle="tab" href="#li-bestseller-product"><span>Bestseller</span></a>
-               </li>
-               <li>
-                  <a data-toggle="tab" href="#li-featured-product"><span>Featured Products</span></a>
-               </li>
-            </ul>
-         </div>
-                     <!-- Begin Li's Tab Menu Content Area -->
+        <!-- <div class="col-lg-12">
+           <div class="li-product-tab">
+              <ul class="nav li-product-menu">
+                 <li >
+                    <a class="active btn btn-warning" data-toggle="tab" href="#li-new-product"><span>{{$cat_name[0]->cat_name}}</span></a>
+                 </li>
+                 <li>
+              </ul>
+           </div>
+        </div> -->
+        <div class="col-xs-12 col-md-12">
+          <h4>{{$cat_name[0]->cat_name}}</h4>
+          <hr style="margin-top: 0;background-color: orange;">
         </div>
        <!-- end -->
        
-       @foreach($all_books as $book)
-        <div class="col-md-3 mt-100">
+       @foreach($cat_wise_books as $book)
+        <div class="col-md-3">
 
             <div class="product-wrapper  text-center">
                 <input type="hidden" id="id" value="{{$book->id}}">
@@ -47,6 +45,6 @@
     
 </div>
 <div class="d-flex justify-content-center" id="pagination">
-          {!! $all_books->links() !!}
+          {!! $cat_wise_books->links() !!}
 </div>
 @endsection

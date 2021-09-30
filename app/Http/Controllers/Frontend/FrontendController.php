@@ -23,5 +23,17 @@ class FrontendController extends Controller
     	$categories=Category::orderBy('created_at', 'DESC')->get();
     	return view('frontend.single-book',['categories'=>$categories,'book'=>$book,'category_wise_book'=>$category_wise_book]);
 	}
+    public function categoryWiseBook($id){
+        $categories=Category::all();
+        $cat_name=Category::select('cat_name')
+                    ->where('id',$id)
+                    ->get();
+                    //dd($cat_name);
+        $cat_wise_books=Book::where('cat_id',$id)
+                        ->orderBy('created_at','DESC')
+                        ->paginate(20);
+        return view('frontend.category-wise-book',['categories'=>$categories,'cat_wise_books'=>$cat_wise_books,'cat_name'=>$cat_name]);
+
+    }
 	
 }

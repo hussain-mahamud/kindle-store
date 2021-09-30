@@ -91,6 +91,7 @@
 	margin-bottom:10px;
 }
 /*Single book*/
+.ajs-message { background-color:orange!important; color:white!important; text-align: center!important; }
 @media only screen and (min-width: 768px) {
   .single-book-cover-img {
   	margin-top:20%;

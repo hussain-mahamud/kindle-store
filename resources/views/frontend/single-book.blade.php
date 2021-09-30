@@ -44,7 +44,7 @@
                   </div>
                   
                   <div class="add-to-cart-div" style="margin-bottom: 20px;">
-                  	<a href="#" class="add-to-cart btn btn-dark buy-btn">
+                  	<a href="#" class="add-to-cart btn btn-warning buy-btn">
                     	<span>Buy now <i class="fa fa-shopping-cart" style="color:white;"></i></span>
                   	</a>
                 </div>
@@ -143,7 +143,7 @@
                         
                     </div>
                     <div class="add-to-cart-div">
-                      <a href="#" class="add-to-cart btn btn-dark buy-btn">
+                      <a href="#" class="add-to-cart btn btn-warning buy-btn">
                         <span>Buy now <i class="fa fa-shopping-cart" style="color:white;"></i></span>
                       </a>
                     </div>
