@@ -7,8 +7,9 @@
       <title>Kindle Store</title>
       <meta name="description" content="" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <!-- Favicon -->
-      <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/images/favicon.png')}}" />
+      <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/images/menu/logo1.png')}}" />
       <!-- Material Design Iconic Font-V2.2.0 -->
       <link rel="stylesheet" href="{{asset('frontend/css/material-design-iconic-font.min.css')}}" />
       <!-- Font Awesome -->
@@ -42,7 +43,9 @@
       <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}" />
       <!-- Modernizr js -->
       <script src="{{asset('frontend/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-
+ <!-- alertify cdn -->
+      <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
    </head>
    <body>
       <!--[if lt IE 8]>
@@ -62,8 +65,8 @@
                      <!-- Begin Header Logo Area -->
                      <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                           <a href="index.html">
-                              <img src="frontend/images/menu/logo/1.jpg" alt="" />
+                           <a href="{{route('home')}}">
+                              <img src="{{asset('frontend/images/logo1.png')}}" alt="" id="logo" />
                            </a>
                         </div>
                      </div>
@@ -74,12 +77,9 @@
                         <form action="#" class="hm-searchbox">
                            <select class="nice-select select-search-category">
                               <option value="0">All</option>
-                              <option value="10">Laptops</option>
-
-                              <option value="13">Cameras</option>
-                              <option value="14">headphone</option>
-                              <option value="15">Smartwatch</option>
-                              <option value="16">Accessories</option>
+                              @foreach($categories as $category)
+                              <option value="{{$category->id}}">{{$category->cat_name}}</option>
+                              @endforeach
                            </select>
                            <input type="text" placeholder="Enter your search key ..." />
                            <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -100,48 +100,47 @@
                               <li class="hm-minicart">
                                  <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-                                    <span class="item-text">
-                                       £80.00
-                                       <span class="cart-item-count">2</span>
+                                    
+                                    <span class="item-text subtotal-field">
+                                       <span class="sub_total_amount">${{Cart::subtotal()}}</span>
+                                       <span class="cart-item-count countItem" id="voda">{{Cart::count()}}</span>
                                     </span>
+                                    
                                  </div>
                                  <span></span>
                                  <div class="minicart">
+                                 
+                                    <?php $contents=Cart::content(); ?>
+                                    
                                     <ul class="minicart-product-list">
+                                       @foreach($contents as $content)
                                        <li>
-                                          <a href="single-product.html" class="minicart-product-image">
-                                             <img src="images/product/small-size/5.jpg" alt="cart products" />
+                                          <a href="{{route('singleBook',$content->id)}}" class="minicart-product-image">
+                                             <img src="{{asset('covers/'.$content->options->img)}}" alt="cart products" />
                                           </a>
                                           <div class="minicart-product-details">
-                                             <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                             <span>£40 x 1</span>
+                                             <h6><a href="{{route('singleBook',$content->id)}}">{{$content->name}}</a></h6>
+                                             <span>${{$content->price}} x {{$content->qty}}</span>
                                           </div>
                                           <button class="close" title="Remove">
                                              <i class="fa fa-close"></i>
                                           </button>
                                        </li>
-                                       <li>
-                                          <a href="single-product.html" class="minicart-product-image">
-                                             <img src="images/product/small-size/6.jpg" alt="cart products" />
-                                          </a>
-                                          <div class="minicart-product-details">
-                                             <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                             <span>£40 x 1</span>
-                                          </div>
-                                          <button class="close" title="Remove">
-                                             <i class="fa fa-close"></i>
-                                          </button>
-                                       </li>
+                                       @endforeach
+                                       
                                     </ul>
-                                    <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                                    <p class="minicart-total">SUBTOTAL: <span class="cart-bottom-sub">${{Cart::subtotal()}}</span></p>
                                     <div class="minicart-button">
-                                       <a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
+                                       <a href="{{route('cart')}}" class="li-button li-button-fullwidth li-button-dark">
                                           <span>View Full Cart</span>
                                        </a>
+                                       
                                        <a href="checkout.html" class="li-button li-button-fullwidth">
                                           <span>Checkout</span>
                                        </a>
+                                       
                                     </div>
+                                    
                                  </div>
                               </li>
                               <!-- Header Mini Cart Area End Here -->
@@ -169,75 +168,11 @@
          </header>
          <!-- Header Area End Here -->
          <!-- Begin Slider With Banner Area -->
-         <div class="slider-with-banner">
-            <div class="container">
-               <div class="row">
-                  <!-- Begin Slider Area -->
-                  <div class="col-lg-8 col-md-8">
-                     <div class="slider-area">
-                        <div class="slider-active owl-carousel">
-                           <!-- Begin Single Slide Area -->
-                           <div class="single-slide align-center-left animation-style-01 bg-1" style="bac">
-                              <div class="slider-progress"></div>
-                              <div class="slider-content">
-                                 <h5>Sale Offer <span>-20% Off</span> This Week</h5>
-                                 <h2>Chamcham Galaxy S9 | S9+</h2>
-                                 <h3>Starting at <span>$1209.00</span></h3>
-                                 <div class="default-btn slide-btn">
-                                    <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- Single Slide Area End Here -->
-                           <!-- Begin Single Slide Area -->
-                           <div class="single-slide align-center-left animation-style-02 bg-2">
-                              <div class="slider-progress"></div>
-                              <div class="slider-content">
-                                 <h5>Sale Offer <span>Black Friday</span> This Week</h5>
-                                 <h2>Work Desk Surface Studio 2018</h2>
-                                 <h3>Starting at <span>$824.00</span></h3>
-                                 <div class="default-btn slide-btn">
-                                    <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- Single Slide Area End Here -->
-                           <!-- Begin Single Slide Area -->
-                           <div class="single-slide align-center-left animation-style-01 bg-3">
-                              <div class="slider-progress"></div>
-                              <div class="slider-content">
-                                 <h5>Sale Offer <span>-10% Off</span> This Week</h5>
-                                 <h2>Phantom 4 Pro+ Obsidian</h2>
-                                 <h3>Starting at <span>$1849.00</span></h3>
-                                 <div class="default-btn slide-btn">
-                                    <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- Single Slide Area End Here -->
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Slider Area End Here -->
-                  <!-- Begin Li Banner Area -->
-                  <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                     <div class="li-banner">
-                        <a href="#">
-                           <img src="frontend/images/banner/1_1.jpg" alt="" />
-                        </a>
-                     </div>
-                     <div class="li-banner mt-15 mt-sm-30 mt-xs-30">
-                        <a href="#">
-                           <img src="frontend/images/banner/1_2.jpg" alt="" />
-                        </a>
-                     </div>
-                  </div>
-                  <!-- Li Banner Area End Here -->
-               </div>
-            </div>
-         </div>
+        
          <!-- Slider With Banner Area End Here -->
-         @include('frontend.index')
+         
+            @yield('content')
+    
          <!-- Begin Product Area -->
         
          <!-- Product Area End Here -->
@@ -289,6 +224,9 @@
       <script src="{{asset('frontend/js/scrollUp.min.js')}}"></script>
       <!-- Main/Activator js -->
       <script src="{{asset('frontend/js/main.js')}}"></script>
+     <!--  own js code -->
+     <script src="{{asset('frontend/js/cart.js')}}"></script>
+     <script src="{{asset('js/custom.js')}}"></script>
    </body>
    <!-- index30:23-->
 </html>

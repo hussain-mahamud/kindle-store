@@ -6,15 +6,14 @@
             <div class="hb-menu">
                <nav>
                   <ul>
-                     <li><a href="about-us.html">Home</a></li>
+                     <li><a href="{{route('home')}}">Home</a></li>
                      <li class="megamenu-holder hello">
                         <a href="shop-left-sidebar.html">Categories</a>
                         <ul class="megamenu hb-megamenu">
                            <li>
-                              <a href="shop-left-sidebar.html">Shop Page Layout</a>
-                              <a href="shop-left-sidebar.html">Shop Page Layout</a>
-                              <a href="shop-left-sidebar.html">Shop Page Layout</a>
-                              
+                              @foreach($categories as $category)
+                              <a href="#">{{$category->cat_name}}</a>
+                              @endforeach
                            </li>
                           
                         </ul>
@@ -24,9 +23,22 @@
                      <li class="dropdown-holder float-right">
                         <a href="index.html">My Account</a>
                         <ul class="hb-dropdown">
-                          
-                           <li><a href="index-3.html">Login</a></li>
-                           <li><a href="index-4.html">Sign UP</a></li>
+                          @if(!Auth::user())
+                           <li><a href="#">Login</a></li>
+                           <li><a href="#">Sign UP</a></li>
+                           @else
+                           <li><a href="#">{{Auth::user()->name}}</a></li>
+                           <li>
+                               <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                           </li>
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                           @endif
                         </ul>
                      </li>
                   </ul>

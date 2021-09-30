@@ -35,13 +35,17 @@
                <label for="keywords" class="form-label">Keywords</label>
                <input type="text" class="form-control" id="keywords" name="keywords" value="{{old('keywords')}}" >
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                <label for="author" class="form-label">Author Name*</label>
                <input type="text" class="form-control" id="author" name="author" value="{{old('author')}}" required>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                <label for="co_author" class="form-label">Co Author</label>
                <input type="text" class="form-control" id="co_author" name="co_author" value="{{old('co_author')}}" >
+            </div>
+            <div class="col-md-2">
+               <label for="price" class="form-label">Price</label>
+               <input type="text" class="form-control" id="price" name="price" value="{{old('price')}}" >
             </div>
             <div class="col-md-12">
                <label for="description" class="form-label ">Description*</label>

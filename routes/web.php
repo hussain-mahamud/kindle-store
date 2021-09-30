@@ -7,6 +7,8 @@ use App\Http\Controllers\Publisher\PublisherController;
 use App\Http\Controllers\Book\BookController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Slider\SliderController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Cart\CartController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +22,21 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-Route::get('/', function () {
-    return view('layout.frontend');
-});
+//Frontend 
+Route::get('/',[FrontendController::Class,'index'])->name('home');
+Route::get('single/{id}',[FrontendController::Class,'singleBook'])->name('singleBook');
+	//Cart 
+Route::get('/cart',[CartController::Class,'index'])->name('cart');
+Route::POST('/add-to-cart',[CartController::Class,'addToCart'])->name('addTocart');
+Route::POST('/remove-cart',[CartController::Class,'removeItem'])->name('removeItem');
+//Single Page
+
+
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //Admin

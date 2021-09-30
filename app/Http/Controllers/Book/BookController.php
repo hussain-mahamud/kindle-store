@@ -53,6 +53,7 @@ class BookController extends Controller
             'description'   =>'required|min:100',
             'cat_id'        =>'required',
             'feature'       =>'required',
+            'price'       =>'required|numeric',
             'cover'         => '        required|file|mimes:jpeg,jpg,png,bmp,gif,svg|max:8192',   
             'file'        => 'required|file|mimes:pdf,docs'   
             ]);
@@ -83,7 +84,8 @@ class BookController extends Controller
                 'feature'       =>$request->feature,
                 'cover'         =>$cv_name,
                 'file'          =>$book_name,
-                'asin'          =>$asin
+                'asin'          =>$asin,
+                'price'          =>$request->price
                             ]);
         }
         return redirect()->route('books.index')->with('success','Book Added Successfully');
@@ -137,7 +139,8 @@ class BookController extends Controller
             'author'        =>'required',
             'description'   =>'required|min:100',
             'cat_id'        =>'required',
-            'feature'       =>'required'
+            'feature'       =>'required',
+            'price'       =>'required|numeric'
             ]);
         $book=Book::find($id);
         if($request->hasfile('cover') && $request->hasfile('file')){
@@ -174,6 +177,7 @@ class BookController extends Controller
             $book->feature=$request->feature;
             $book->cover=$cv_name;
             $book->file=$book_name;
+            $book->price=$request->price;
             $book->save();
             return redirect()->route('books.index')->with('success','Book Updated Successfully');
         }
@@ -203,6 +207,7 @@ class BookController extends Controller
                 $book->cat_id=$request->cat_id;
                 $book->feature=$request->feature;
                 $book->cover=$cv_name;
+                $book->price=$request->price;
                 $book->save();
             }
             else if($request->hasfile('file')){
@@ -227,6 +232,7 @@ class BookController extends Controller
                 $book->description=$request->description;
                 $book->cat_id=$request->cat_id;
                 $book->feature=$request->feature;
+                $book->price=$request->price;
                 $book->file=$book_name;
                 $book->save();
 
@@ -242,6 +248,7 @@ class BookController extends Controller
             $book->description=$request->description;
             $book->cat_id=$request->cat_id;
             $book->feature=$request->feature;
+            $book->price=$request->price;
             $book->save();
 
         }

@@ -26,6 +26,7 @@ class CreateBooksTable extends Migration
             $table->string('cover');
             $table->string('file');
             $table->bigInteger('asin');
+            $table->double('price');
             $table->timestamps();
         });
     }

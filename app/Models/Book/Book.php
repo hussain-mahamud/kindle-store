@@ -20,5 +20,6 @@ class Book extends Model
         'cover',
         'file',
         'asin',
+        'price',
     ];
 }

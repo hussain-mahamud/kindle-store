@@ -71,6 +71,55 @@
 /*----------------------------------------*/
 /*  1.1 Basic
 /*----------------------------------------*/
+/*custom css start*/
+/*by hussain*/
+#logo{
+	height:45px;
+	width:190px;
+}
+/*end by hussain*/
+@media screen and (max-width: 2000px) {
+  .buy-btn{
+  	width:187.59px!important;
+  	height: 38px!important;
+  }
+}
+.add-to-cart-div{
+	margin-top:10px;
+}
+#pagination{
+	margin-bottom:10px;
+}
+/*Single book*/
+@media only screen and (min-width: 768px) {
+  .single-book-cover-img {
+  	margin-top:20%;
+    float:right!important;
+  }
+}
+.single-book-cover-img{
+	
+	margin-bottom: 5%!important;
+	height:100%!important;
+	width: 100%!important;
+}
+.review-submit-section{
+	margin-top:15px;
+	margin-bottom: 10px;
+}
+.submit-review-div{
+	margin-top: 15px;
+	margin-left: 5%;
+}
+.review-links{
+	cursor: pointer;
+	color: white!important;
+}
+.review-btn{
+	margin-top:20px!important;
+	margin-left:10px!important;
+}
+/*custom css end*/
 body {
 	color: #242424;
 	font-family: 'Rubik', sans-serif;
@@ -360,9 +409,9 @@ a.review-links {
 	height: 40px;
 	line-height: 40px;
 }
-a.review-links:hover {
+/*a.review-links:hover {
 	background: #fed700;
-}
+}*/
 /*----------------------------------------*/
 /*  1.5 Text Color
 /*----------------------------------------*/
@@ -1079,6 +1128,7 @@ textarea:focus {
   color: #0363cd;
   text-transform: capitalize;
   font-weight: 500;
+  margin-left: 10%;
   margin: 0 0 15px 0;
 }
 .product-details-ref {

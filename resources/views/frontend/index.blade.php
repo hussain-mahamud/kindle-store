@@ -1,4 +1,6 @@
-
+@extends('layout.frontend')
+@section('content')
+@include('frontend.slider')
 <div class="container d-flex justify-content-center product-area pt-60 pb-50">
     <div class="row">
        <!-- start -->
@@ -17,47 +19,34 @@
                         </ul>
                      </div>
                      <!-- Begin Li's Tab Menu Content Area -->
-                  </div>
+        </div>
        <!-- end -->
+       
+       @foreach($all_books as $book)
         <div class="col-md-3 mt-100">
-            <div class="product-wrapper  text-center">
-                <div class="product-img-1"> <a href="#" data-abc="true"> <img src="frontend/coverkdp.jpg" alt="" height="250" width="190"> </a>
-                    <div class="product-action">
-                        <div class="product-action-style"> <a href="#"> <i class="fa fa-plus"></i> </a> <a href="#"> <i class="fa fa-heart"></i> </a> <a href="#"> <i class="fa fa-shopping-cart"></i> </a> </div>
-                    </div>
-                    <div class="product-details">
-                        <a href="">Mental Toughness</a>
 
-                    </div>
+            <div class="product-wrapper  text-center">
+                <input type="hidden" id="id" value="{{$book->id}}">
+                <div class="product-img-1"> <a href="{{route('singleBook',$book->id)}}" data-abc="true"> <img src="{{asset('covers/'.$book->cover)}}" alt="" height="190" width="170"> </a>
+
+                    
+                </div>
+                <div class="add-to-cart-div">
+                  <a href="#" class="add-to-cart btn btn-dark buy-btn">
+                    <span>Buy now <i class="fa fa-shopping-cart" style="color:white;"></i></span>
+                  </a>
+                </div>
+                <div class="book-details" style="margin-top:5px;">
+                        <a href="{{route('singleBook',$book->id)}}">{{$book->title}}</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mt-100">
-            <div class="product-wrapper mb-45 text-center">
-                <div class="product-img-1"> <a href="#" data-abc="true"> <img src="frontend/coverkdp.jpg" alt="" height="250" width="190"> </a>
-                    <div class="product-action">
-                        <div class="product-action-style"> <a class="action-plus" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#" data-abc="true"> <i class="fa fa-plus"></i> </a> <a class="action-heart" title="Wishlist" href="#" data-abc="true"> <i class="fa fa-heart"></i> </a> <a class="action-cart" title="Add To Cart" href="#" data-abc="true"> <i class="fa fa-shopping-cart"></i> </a> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mt-100">
-            <div class="product-wrapper mb-45 text-center">
-                <div class="product-img-1"> <a href="#" data-abc="true"> <img src="frontend/coverkdp.jpg" alt="" height="250" width="190"> </a>
-                    <div class="product-action">
-                        <div class="product-action-style"> <a class="action-plus" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#" data-abc="true"> <i class="fa fa-plus"></i> </a> <a class="action-heart" title="Wishlist" href="#" data-abc="true"> <i class="fa fa-heart"></i> </a> <a class="action-cart" title="Add To Cart" href="#" data-abc="true"> <i class="fa fa-shopping-cart"></i> </a> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mt-100">
-            <div class="product-wrapper mb-45 text-center">
-                <div class="product-img-1"> <a href="#" data-abc="true"> <img src="frontend/coverkdp.jpg" alt="" height="250" width="190"> </a>
-                    <div class="product-action">
-                        <div class="product-action-style"> <a class="action-plus" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#" data-abc="true"> <i class="fa fa-plus"></i> </a> <a class="action-heart" title="Wishlist" href="#" data-abc="true"> <i class="fa fa-heart"></i> </a> <a class="action-cart" title="Add To Cart" href="#" data-abc="true"> <i class="fa fa-shopping-cart"></i> </a> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
+        
     </div>
+    
 </div>
+<div class="d-flex justify-content-center" id="pagination">
+          {!! $all_books->links() !!}
+</div>
+@endsection
